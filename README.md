@@ -33,12 +33,3 @@ http://localhost:8080
 ```
 
 Once running, go to Admin → Connections in the Airflow UI and add your AWS credentials there. No secrets are hardcoded in the code.
-
-## Project structure
-
-├── dags/
-│   └── weather_to_s3_timestamped.py
-├── docker-compose.yaml
-├── requirements.txt
-└── .gitignore
-
