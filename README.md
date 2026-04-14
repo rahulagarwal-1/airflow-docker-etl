@@ -4,7 +4,7 @@ A personal project built to learn Apache Airflow orchestration and Docker contai
 
 ## What it does
 
-Fetches current weather data for Delhi from the [Open-Meteo API](https://open-meteo.com/) on a schedule, saves it as a timestamped CSV, and uploads it to AWS S3 under a date-partitioned path (`weather/YYYY/MM/DD/`).
+Fetches real-time weather data from the Open-Meteo API on a schedule, saves it as a timestamped CSV, and uploads it to S3 under a date-partitioned path (`weather/YYYY/MM/DD/`). Credentials secured via Airflow Connections — no hardcoded secrets.
 
 ## Why I built it
 
