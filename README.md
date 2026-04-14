@@ -1,25 +1,60 @@
-# Weather Data Pipeline with Airflow and AWS S3
+# Airflow Docker ETL — Weather to S3
 
-This project demonstrates a simple yet functional data pipeline built using **Apache Airflow**, running on **Docker**, to fetch real-time weather data and upload it to an **Amazon S3** bucket.
+A personal project built to learn Apache Airflow orchestration and Docker containerisation. Uses real-time weather data as the data source to keep it practical.
 
-The DAG (`weather_to_s3_timestamped`) fetches current weather data for Delhi from the [Open-Meteo API](https://open-meteo.com/), stores it as a timestamped CSV, and uploads it to a partitioned folder structure in S3 (`weather/YYYY/MM/DD/`).
+## What it does
 
+Fetches current weather data for Delhi from the [Open-Meteo API](https://open-meteo.com/) on a schedule, saves it as a timestamped CSV, and uploads it to AWS S3 under a date-partitioned path (`weather/YYYY/MM/DD/`).
 
+## Why I built it
 
-## Flow
+I wanted hands-on experience with:
+- Running Airflow locally inside Docker
+- Writing and scheduling a DAG
+- Connecting to an external API and landing data in S3
+- Managing cloud credentials securely without hardcoding
 
-- Scheduled execution (every 1 minute)
-- Fetches real-time weather data via public API
-- Saves timestamped CSV files locally
-- Uploads files to AWS S3 with date-based folder partitioning
-- Uses Airflow connections to securely handle AWS credentials
-- Runs on Docker with CeleryExecutor
+## Pipeline flow
 
-## Technologies Used
+Open-Meteo API  →  Airflow DAG  →  Local CSV  →  AWS S3 (date-partitioned)
 
-- Apache Airflow 2.5
-- Python 3.7
-- Open-Meteo API
-- Amazon S3 (via Boto3)
-- Docker Compose
+## Tech stack
 
+| Tool | Purpose |
+|------|---------|
+| Apache Airflow 2.5 | Orchestration and scheduling |
+| Docker Compose | Containerisation |
+| Open-Meteo API | Weather data source |
+| AWS S3 + Boto3 | Cloud storage |
+| Python 3.10 | Pipeline logic |
+
+## How to run
+
+```bash
+# Clone the repo
+git clone https://github.com/rahulagarwal-1/airflow-docker-etl.git
+cd airflow-docker-etl
+
+# Start Airflow
+docker-compose up -d
+
+# Open Airflow UI
+http://localhost:8080
+```
+
+Once running, go to Admin → Connections in the Airflow UI and add your AWS credentials there. No secrets are hardcoded in the code.
+
+## Project structure
+
+├── dags/
+│   └── weather_to_s3_timestamped.py
+├── docker-compose.yaml
+├── requirements.txt
+└── .gitignore
+
+## Learnings
+
+- How Airflow DAGs are structured and scheduled
+- CeleryExecutor setup inside Docker Compose
+- S3 date-based partitioning for raw data storage
+- Securing credentials using Airflow Connections UI
