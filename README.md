@@ -41,3 +41,4 @@ Once running, go to Admin → Connections in the Airflow UI and add your AWS cre
 ├── docker-compose.yaml
 ├── requirements.txt
 └── .gitignore
+
